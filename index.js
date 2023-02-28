@@ -18,7 +18,7 @@
 function ilkiniDon(stringArray, callback) {
   return callback(stringArray[0])
 }
-console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin+metin}));
+console.log('örnek görev:', ilkiniDon(['en büyük fener ','aag'],function(metin){return metin+metin}));
 
 // Başlangıç Challenge'ı Sonu
 
@@ -64,10 +64,15 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru(){
+ const minskor=10
+  const maxskor=25
+ return (Math.floor(Math.random()*(maxskor-minskor+1))+10);
 }
+  console.log(takimSkoru());
 
+
+ 
 
 
 
@@ -86,10 +91,31 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(skor,no){
+  
+
+let evsahibiSkor =0;
+let konukSkor = 0;
+for(let i=0;i<no;i++){
+
+evsahibiSkor=evsahibiSkor +skor();
 }
 
+for(let i=0;i<no;i++){
+
+  konukSkor=konukSkor + skor(); 
+  }
+
+const obje ={
+"EvSahibi" : evsahibiSkor,
+"KonukTakim" : konukSkor,
+
+};
+
+return obje ;
+
+}
+console.log(macSonucu(takimSkoru,4));
 
 
 
@@ -109,10 +135,16 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function periyotSkoru(SkorPeriyot) {
 
-}
+  const obje = {
+    "EvSahibi": SkorPeriyot(),
+    "KonukTakim": SkorPeriyot(),
+  }
+  return obje;
+  
+  }
+  console.log(periyotSkoru(takimSkoru))
 
 
 /* Zorlayıcı Görev 5: skorTabelasi() 
@@ -146,12 +178,46 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 ] */
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
 
-function skorTabelasi(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
-}
+function skorTabelasi(periyot1,takimSkoru1,skorson) {
+ let takim1p = []
+ let takim2p = []
+ for (let i=0; i<skorson; i++){
+  takim1p[i]= takimSkoru1();
+ }
+ for (let i=0; i<skorson; i++){
+  takim2p[i]= takimSkoru1();
+ }
+ let mac1 = 0
+ let mac2 = 0
+ for (let i=0; i<skorson; i++){
+  mac1 = mac1 + takim1p[i];
+ }
+ for (let i=0; i<skorson; i++){
+  mac2 = mac2 + takim2p[i];
+  if(mac1<mac2){
+    obje={
+      "EvSahibi": periyot1(),
+      "KonukTakim": periyot1(),
+    }
+
+    }
+    else if(mac2<mac1){
+      obje={
+        "Evsahibi": periyot1(),
+        "Konuktakim": periyot1(),
+      }
+    }
+    else{
+      mac1+mac2
+    }
+  }
+
+ }
+ // if ile mac1 mac2 kıyaslanacak, eğer esit ise tekrar uzatma ile periyotskoru ile skor üretilip tekrar karşılaştırılacak, sonuç olarak ise eşitlik olması durumunda uzatmalarla beraber olan toplam verilecek, eşitlik yoksa 4 periyotun toplamı sonuç olarak verilcek
 
 
 
+console.log(skorTabelasi(periyotSkoru,takimSkoru,4))
 
 /* Aşağıdaki satırları lütfen değiştirmeyiniz*/
 function sa(){
@@ -169,3 +235,19 @@ module.exports = {
   periyotSkoru,
   skorTabelasi,
 }
+
+const kullanıcılar = [
+  {"ad": "örnek",
+"sifre": 1234}
+]
+function giris(isimsoyisim, sifre){
+   const yenikullanıcı= 
+   {
+    "ad": isimsoyisim,
+    "sifre": sifre
+   }
+   kullanıcılar.push(yenikullanıcı)
+  
+return kullanıcılar[1]
+}
+console.log(giris("burcubasak", 1234))
